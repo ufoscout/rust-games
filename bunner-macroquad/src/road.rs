@@ -70,14 +70,16 @@ impl Row for Road {
     }
 
     fn image(&self) -> Texture2D {
-        *storage::get::<Resources>()
+        let resources = storage::get::<Resources>();
+        resources
             .road_textures
             .get(self.index as usize)
+            .cloned()
             .unwrap()
     }
 
     fn play_sound(&self) {
-        play_sound_once(storage::get::<Resources>().road_sound);
+        play_sound_once(&storage::get::<Resources>().road_sound);
     }
 
     fn next(&self) -> Box<dyn Row> {

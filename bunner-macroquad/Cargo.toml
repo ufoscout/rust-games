@@ -5,13 +5,12 @@ name = "bunner-macroquad"
 version = "0.1.0"
 
 [dependencies]
-macroquad = "0.3.23"
+macroquad = { version = "0.4", features = ["audio"] }
 
-[profile.dev.package.'*']
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+ 
+# Enable high optimizations for dependencies, but not for our code:
+[profile.dev.package."*"]
 opt-level = 3
-
-[profile.release]
-opt-level = 'z'
-lto = true
-panic = 'abort'
-codegen-units = 1

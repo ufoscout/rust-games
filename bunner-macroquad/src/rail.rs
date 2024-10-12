@@ -46,8 +46,9 @@ impl Row for Rail {
                     Position::new(WIDTH - 1000, 47)
                 };
                 self.children.push(Child::Train(Train::new(dx, position)));
-                play_sound_once(storage::get::<Resources>().bell_sound);
-                let train_sound = *storage::get::<Resources>()
+                let resources = storage::get::<Resources>();
+                play_sound_once(&resources.bell_sound);
+                let train_sound = resources
                     .train_sounds
                     .get(rand::gen_range::<usize>(0, 2))
                     .unwrap();
@@ -57,14 +58,16 @@ impl Row for Rail {
     }
 
     fn image(&self) -> Texture2D {
-        *storage::get::<Resources>()
+        let resources = storage::get::<Resources>();
+        resources
             .rail_textures
             .get(self.index as usize)
+            .cloned()
             .unwrap()
     }
 
     fn play_sound(&self) {
-        play_sound_once(storage::get::<Resources>().grass_sound);
+        play_sound_once(&storage::get::<Resources>().grass_sound);
     }
 
     fn next(&self) -> Box<dyn Row> {

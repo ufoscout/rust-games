@@ -12,17 +12,12 @@ bracket-pathfinding = "0.8.4"
 nanoserde = "0.1.26"
 lazy_static = "1.4.0"
 
-# Doesn't work with android build
-[profile.dev.package.'*']
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+ 
+# Enable high optimizations for dependencies, but not for our code:
+[profile.dev.package."*"]
 opt-level = 3
 
-[profile.release]
-opt-level = 'z'
-lto = true
-panic = 'abort'
-codegen-units = 1
-
-[package.metadata.scripts]
-build-web = "bin/build-web"
-serve-web = "bin/serve-web"
 

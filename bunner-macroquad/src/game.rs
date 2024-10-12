@@ -117,12 +117,13 @@ impl Game {
     }
 
     fn loop_sound(&mut self, row_sound: RowSound, volume: f32) {
+        let resources = storage::get::<Resources>();
         let sound = match row_sound {
-            RowSound::River => *storage::get::<Resources>()
+            RowSound::River => resources
                 .river_sounds
                 .get(gen_range::<usize>(0, 2))
                 .unwrap(),
-            RowSound::Traffic => *storage::get::<Resources>()
+            RowSound::Traffic => resources
                 .traffic_sounds
                 .get(gen_range::<usize>(0, 3))
                 .unwrap(),

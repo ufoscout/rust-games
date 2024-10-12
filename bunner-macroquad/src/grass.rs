@@ -33,14 +33,16 @@ impl Row for Grass {
     }
 
     fn image(&self) -> Texture2D {
-        *storage::get::<Resources>()
+        let resources = storage::get::<Resources>();
+        resources
             .grass_textures
             .get(self.index as usize)
+            .cloned()
             .unwrap()
     }
 
     fn play_sound(&self) {
-        play_sound_once(storage::get::<Resources>().grass_sound);
+        play_sound_once(&storage::get::<Resources>().grass_sound);
     }
 
     fn next(&self) -> Box<dyn Row> {

@@ -13,7 +13,8 @@ impl Actor for Splat {
     fn update(&mut self) {}
 
     fn draw(&self, offset_x: i32, offset_y: i32) {
-        let image = *storage::get::<Resources>()
+        let resources = storage::get::<Resources>();
+        let image = resources
             .splat_textures
             .get(self.direction as usize)
             .unwrap();

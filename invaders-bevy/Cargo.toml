@@ -26,9 +26,10 @@ features = [
     "webgl2",
 ]
 
-[workspace]
-resolver = "2" # Important! wgpu/Bevy needs this!
-
-# Enable max optimizations for dependencies, excluding rust-invaders code:
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+ 
+# Enable high optimizations for dependencies, but not for our code:
 [profile.dev.package."*"]
 opt-level = 3

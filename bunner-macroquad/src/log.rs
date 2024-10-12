@@ -23,7 +23,8 @@ impl Actor for Log {
     }
 
     fn draw(&self, offset_x: i32, offset_y: i32) {
-        let image = *storage::get::<Resources>()
+        let resources = storage::get::<Resources>();
+        let image = resources
             .log_textures
             .get(self.image_index)
             .unwrap();

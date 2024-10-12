@@ -8,3 +8,11 @@ version = "0.1.0"
 fastrand = "1.7.0"
 ggez = "0.7.0"
 glam = {version = "0.20.5", features = ["mint"]}
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+ 
+# Enable high optimizations for dependencies, but not for our code:
+[profile.dev.package."*"]
+opt-level = 3

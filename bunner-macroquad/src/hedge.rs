@@ -15,7 +15,8 @@ impl Actor for Hedge {
     fn update(&mut self) {}
 
     fn draw(&self, offset_x: i32, offset_y: i32) {
-        let image = *storage::get::<Resources>()
+        let resources = storage::get::<Resources>();
+        let image = resources
             .bush_textures
             .get(self.hedge_tile as usize * 2 + self.hedge_row as usize)
             .unwrap();
