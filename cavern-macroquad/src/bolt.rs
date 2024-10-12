@@ -29,7 +29,7 @@ impl Bolt {
 
             x,
             y,
-            image: storage::get::<Resources>().blank_texture,
+            image: storage::get::<Resources>().blank_texture.clone(),
             anchor: COLLIDE_ACTOR_DEFAULT_ANCHOR,
         }
     }
@@ -66,7 +66,7 @@ impl Bolt {
         let direction_factor = if self.direction_x > 0 { 2 } else { 0 };
         let timer_factor = (game_timer / 4) % 2;
         let image_i = (direction_factor + timer_factor) as usize;
-        self.image = storage::get::<Resources>().bolt_textures[image_i];
+        self.image = storage::get::<Resources>().bolt_textures[image_i].clone();
     }
 }
 
@@ -87,8 +87,8 @@ impl Actor for Bolt {
         &mut self.y
     }
 
-    fn image(&self) -> macroquad::prelude::Texture2D {
-        self.image
+    fn image(&self) -> &macroquad::prelude::Texture2D {
+        &self.image
     }
 
     fn anchor(&self) -> crate::actor::Anchor {

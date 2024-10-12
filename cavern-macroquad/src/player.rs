@@ -54,7 +54,7 @@ impl Player {
 
             x: 0,
             y: 0,
-            image: storage::get::<Resources>().blank_texture,
+            image: storage::get::<Resources>().blank_texture.clone(),
             anchor: GRAVITY_ACTOR_DEFAULT_ANCHOR,
 
             vel_y: 0,
@@ -188,24 +188,24 @@ impl Player {
         let resources = storage::get::<Resources>();
 
         // Set sprite image. If we're currently hurt, the sprite will flash on and off on alternate frames.
-        self.image = resources.blank_texture;
+        self.image = resources.blank_texture.clone();
         if self.hurt_timer <= 0 || self.hurt_timer % 2 == 1 {
             let dir_index = if self.direction_x > 0 { 1 } else { 0 };
             if self.hurt_timer > 100 {
                 if self.health > 0 {
-                    self.image = resources.recoil_textures[dir_index];
+                    self.image = resources.recoil_textures[dir_index].clone();
                 } else {
                     let image_i = (game_timer / 4) % 2;
-                    self.image = resources.fall_textures[image_i as usize];
+                    self.image = resources.fall_textures[image_i as usize].clone();
                 }
             } else if self.fire_timer > 0 {
-                self.image = resources.blow_textures[dir_index];
+                self.image = resources.blow_textures[dir_index].clone();
             } else if dx == 0 {
-                self.image = resources.still_texture;
+                self.image = resources.still_texture.clone();
             } else {
                 let direction_factor = dir_index * 4;
                 let image_i = direction_factor + ((game_timer / 8) % 4) as usize;
-                self.image = resources.run_textures[image_i];
+                self.image = resources.run_textures[image_i].clone();
             }
         }
     }
@@ -228,8 +228,8 @@ impl Actor for Player {
         &mut self.y
     }
 
-    fn image(&self) -> Texture2D {
-        self.image
+    fn image(&self) -> &Texture2D {
+        &self.image
     }
 
     fn anchor(&self) -> Anchor {

@@ -52,7 +52,7 @@ impl Robot {
         Self {
             x,
             y,
-            image: storage::get::<Resources>().blank_texture,
+            image: storage::get::<Resources>().blank_texture.clone(),
             anchor: Anchor::CentreBottom,
             type_,
             speed: gen_range(1, 4),
@@ -154,7 +154,7 @@ impl Robot {
             1 + ((game_timer / 4) % 4)
         };
         let image_i = (type_factor + direction_factor + fire_factor) as usize;
-        self.image = storage::get::<Resources>().robot_textures[image_i];
+        self.image = storage::get::<Resources>().robot_textures[image_i].clone();
     }
 }
 
@@ -175,8 +175,8 @@ impl Actor for Robot {
         &mut self.y
     }
 
-    fn image(&self) -> macroquad::prelude::Texture2D {
-        self.image
+    fn image(&self) -> &macroquad::prelude::Texture2D {
+        &self.image
     }
 
     fn anchor(&self) -> Anchor {

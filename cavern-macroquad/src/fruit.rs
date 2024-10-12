@@ -77,7 +77,7 @@ impl Fruit {
 
             x,
             y,
-            image: storage::get::<Resources>().blank_texture,
+            image: storage::get::<Resources>().blank_texture.clone(),
             anchor: GRAVITY_ACTOR_DEFAULT_ANCHOR,
 
             vel_y: 0,
@@ -130,7 +130,7 @@ impl Fruit {
         let type_factor = self.type_.val() * 3;
         let timer_factor = [0, 1, 2, 1][((game_timer / 6) % 4) as usize];
         let image_i = (type_factor + timer_factor) as usize;
-        self.image = storage::get::<Resources>().fruit_textures[image_i];
+        self.image = storage::get::<Resources>().fruit_textures[image_i].clone();
     }
 }
 
@@ -151,8 +151,8 @@ impl Actor for Fruit {
         &mut self.y
     }
 
-    fn image(&self) -> macroquad::prelude::Texture2D {
-        self.image
+    fn image(&self) -> &macroquad::prelude::Texture2D {
+        &self.image
     }
 
     fn anchor(&self) -> crate::actor::Anchor {

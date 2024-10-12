@@ -35,7 +35,7 @@ pub fn draw_game_text(text: &str, y: i32, x: Option<i32>) {
     let fonts = &storage::get::<Resources>().fonts;
 
     for chr in text {
-        let font = fonts[chr];
+        let font = &fonts[chr];
         draw_texture(font, x as f32, y as f32, WHITE);
         x += char_width(chr);
     }

@@ -26,7 +26,7 @@ pub trait Actor {
     fn x_mut(&mut self) -> &mut i32;
     fn y(&self) -> i32;
     fn y_mut(&mut self) -> &mut i32;
-    fn image(&self) -> Texture2D;
+    fn image(&self) -> &Texture2D;
     fn anchor(&self) -> Anchor;
 
     // Rust: All the geometry methods below are meant to be conveniently implemented, not fast.

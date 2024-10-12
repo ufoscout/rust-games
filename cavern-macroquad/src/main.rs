@@ -83,7 +83,7 @@ async fn main() -> Result<(), Box<dyn error::Error>> {
     // Start music
     let music = audio::load_sound("resources/music/theme.ogg").await?;
     audio::play_sound(
-        music,
+        &music,
         PlaySoundParams {
             looped: true,
             volume: 0.3,

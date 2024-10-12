@@ -25,7 +25,7 @@ const MAX_TIMER: i32 = 250;
 pub type RcOrb = Rc<RefCell<Orb>>;
 pub type WkOrb = Weak<RefCell<Orb>>;
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 
 pub struct Orb {
     pub direction_x: i32,
@@ -53,7 +53,7 @@ impl Orb {
             trapped_enemy_type: None,
             x,
             y,
-            image: storage::get::<Resources>().blank_texture,
+            image: storage::get::<Resources>().blank_texture.clone(),
             anchor: Anchor::Centre,
         }
     }
@@ -105,16 +105,16 @@ impl Orb {
         if self.timer < 9 {
             // Orb grows to full size over the course of 9 frames - the animation frame updating every 3 frames
             let timer_factor = self.timer / 3;
-            self.image = resources.orb_textures[timer_factor as usize];
+            self.image = resources.orb_textures[timer_factor as usize].clone();
         } else {
             if let Some(trapped_enemy_type) = self.trapped_enemy_type {
                 let enemy_type_factor = trapped_enemy_type.val() * 8;
                 let timer_factor = (self.timer / 4) % 8;
                 let image_i = (enemy_type_factor + timer_factor) as usize;
-                self.image = resources.trap_textures[image_i];
+                self.image = resources.trap_textures[image_i].clone();
             } else {
                 let timer_factor = 3 + (((self.timer - 9) / 8) % 4);
-                self.image = resources.orb_textures[timer_factor as usize];
+                self.image = resources.orb_textures[timer_factor as usize].clone();
             }
         }
     }
@@ -137,8 +137,8 @@ impl Actor for Orb {
         &mut self.y
     }
 
-    fn image(&self) -> macroquad::prelude::Texture2D {
-        self.image
+    fn image(&self) -> &macroquad::prelude::Texture2D {
+        &self.image
     }
 
     fn anchor(&self) -> crate::actor::Anchor {

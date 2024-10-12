@@ -5,8 +5,8 @@ name = "cavern-macroquad"
 version = "0.1.0"
 
 [dependencies]
-macroquad = "0.3.15"
-phf = {version = "0.10.1", features = ["macros"]}
+macroquad = { version = "0.4", features = ["audio"] }
+phf = { version = "0.11", features = ["macros"] }
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]

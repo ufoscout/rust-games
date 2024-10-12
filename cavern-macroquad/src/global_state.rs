@@ -63,7 +63,7 @@ impl GlobalState {
         match self.state {
             State::Menu => {
                 // Draw title screen
-                draw_texture(resources.title_texture, 0., 0., WHITE);
+                draw_texture(&resources.title_texture, 0., 0., WHITE);
 
                 // Draw "Press SPACE" animation, which has 10 frames numbered 0 to 9
                 // The first part gives us a number between 0 and 159, based on the game timer
@@ -72,7 +72,7 @@ impl GlobalState {
                 // animation staying on frame 9 for three quarters of the time. Adding 40 to the game timer is done to alter
                 // which stage the animation is at when the game first starts
                 let anim_frame = (((self.game.timer + 40) % 160) / 4).min(9) as usize;
-                draw_texture(resources.space_textures[anim_frame], 130., 280., WHITE);
+                draw_texture(&resources.space_textures[anim_frame], 130., 280., WHITE);
             }
             State::Play => {
                 self.draw_status();
@@ -80,7 +80,7 @@ impl GlobalState {
             State::GameOver => {
                 self.draw_status();
                 // Display "Game Over" image
-                draw_texture(resources.over_texture, 0., 0., WHITE);
+                draw_texture(&resources.over_texture, 0., 0., WHITE);
             }
         }
     }
@@ -111,7 +111,7 @@ impl GlobalState {
 
         let mut x = 0;
         for image in lives_health {
-            let texture = status_textures[image];
+            let texture = &status_textures[image];
             draw_texture(texture, x as f32, 450., WHITE);
             x += IMAGE_WIDTH[image];
         }

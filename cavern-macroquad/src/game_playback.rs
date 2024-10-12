@@ -13,7 +13,7 @@ use crate::player::Player;
 
 pub fn play_game_sound(player: Option<&Player>, sound: &Sound) {
     if player.is_some() {
-        audio::play_sound_once(*sound);
+        audio::play_sound_once(sound);
     }
 }
 

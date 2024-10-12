@@ -23,7 +23,7 @@ impl Pop {
             timer: -1,
             x,
             y,
-            image: storage::get::<Resources>().blank_texture,
+            image: storage::get::<Resources>().blank_texture.clone(),
             anchor: Anchor::Centre,
         }
     }
@@ -34,7 +34,7 @@ impl Pop {
         let type_factor = self.type_ * 7;
         let timer_factor = self.timer / 2;
         let image_i = (type_factor + timer_factor) as usize;
-        self.image = storage::get::<Resources>().pop_textures[image_i];
+        self.image = storage::get::<Resources>().pop_textures[image_i].clone();
     }
 }
 
@@ -55,8 +55,8 @@ impl Actor for Pop {
         &mut self.y
     }
 
-    fn image(&self) -> macroquad::prelude::Texture2D {
-        self.image
+    fn image(&self) -> &macroquad::prelude::Texture2D {
+        &self.image
     }
 
     fn anchor(&self) -> crate::actor::Anchor {

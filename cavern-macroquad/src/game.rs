@@ -161,13 +161,13 @@ impl Game {
         let resources = storage::get::<Resources>();
 
         draw_texture(
-            resources.background_textures[self.level as usize % 4],
+            &resources.background_textures[self.level as usize % 4],
             0.,
             0.,
             WHITE,
         );
 
-        let block_sprite = resources.block_textures[(self.level % 4) as usize];
+        let block_sprite = &resources.block_textures[(self.level % 4) as usize];
 
         // Display blocks
         for row_y in 0..NUM_ROWS {
