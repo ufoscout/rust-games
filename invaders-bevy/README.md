@@ -2,6 +2,9 @@ NEW YouTube full tutorial - [Rust Bevy - Full Tutorial - Game Dev](https://www.y
 
 Rust [Bevy](https://bevyengine.org/) - Game Dev tutorials
 
+![Game screenshot](img/invaders.png)
+
+
 ### Latest Bevy Version updates
 
 - `2024-06-08` - Updated to Bevy 0.14. Thanks to [Matt Woelfel](https://github.com/woelfman)

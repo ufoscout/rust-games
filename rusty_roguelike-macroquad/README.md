@@ -1,5 +1,7 @@
 # Rusty Roguelike for Macroquead
 
+Original code taken from: https://github.com/rust-gamedev/rust-game-ports
+
 A small roguelike based on the example in the Hands-on Rust book by Herbert
 Wolverson, but written in Macroquad.
 
@@ -15,3 +17,5 @@ Buy the book from Pragmatic Programmer:
  * Assorted CC0/public domain images from opengameart.org
  * Knight by PolygonDan
  * Potions by Admurin: https://admurin.itch.io/
+
+![Game screenshot](img/rusty_roguelike.png)
