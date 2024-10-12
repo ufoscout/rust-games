@@ -34,7 +34,7 @@ impl Templates {
         DeRon::deserialize_ron(&file).expect("Unable to load templates")
     }
 
-    pub fn spawn_entities(&self, ecs: &mut World, level: usize, spawn_points: &[Point]) {
+    pub fn spawn_entities(&self, ecs: &mut World, resources: &mut Resources, level: usize, spawn_points: &[Point]) {
         let mut available_entities = Vec::new();
         self.entities
             .iter()
@@ -52,7 +52,7 @@ impl Templates {
             }
         });
 
-        commands.flush(ecs);
+        commands.flush(ecs, resources);
     }
 
     fn spawn_entity(

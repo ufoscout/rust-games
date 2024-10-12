@@ -10,8 +10,7 @@ mod spawner;
 mod systems;
 mod turn_state;
 
-#[macro_use]
-extern crate lazy_static;
+use lazy_static::lazy_static;
 
 lazy_static! {
     pub static ref RANDOM_FLOOR_TILES: Vec<Sprite> = gen_random_tiles(0, 16);
@@ -67,7 +66,7 @@ impl State {
         spawn_player(&mut ecs, map_builder.player_start);
         let exit_idx = map_builder.map.point2d_to_index(map_builder.amulet_start);
         map_builder.map.tiles[exit_idx] = TileType::Exit;
-        spawn_level(&mut ecs, 0, &map_builder.monster_spawns).await;
+        spawn_level(&mut ecs, &mut resources, 0, &map_builder.monster_spawns).await;
         resources.insert(map_builder.map);
         resources.insert(CameraView::new(map_builder.player_start));
         resources.insert(tileset);
@@ -185,7 +184,7 @@ impl State {
                 cb.remove(*e);
             }
         }
-        cb.flush(&mut self.ecs);
+        cb.flush(&mut self.ecs, &mut self.resources);
 
         <&mut FieldOfView>::query()
             .iter_mut(&mut self.ecs)
@@ -211,6 +210,7 @@ impl State {
 
         spawn_level(
             &mut self.ecs,
+            &mut self.resources,
             map_level as usize,
             &map_builder.monster_spawns,
         )
@@ -232,7 +232,7 @@ impl State {
         spawn_player(&mut self.ecs, map_builder.player_start);
         let exit_idx = map_builder.map.point2d_to_index(map_builder.amulet_start);
         map_builder.map.tiles[exit_idx] = TileType::Exit;
-        spawn_level(&mut self.ecs, 0, &map_builder.monster_spawns).await;
+        spawn_level(&mut self.ecs, &mut self.resources, 0, &map_builder.monster_spawns).await;
         self.resources.insert(map_builder.map);
         self.resources
             .insert(CameraView::new(map_builder.player_start));

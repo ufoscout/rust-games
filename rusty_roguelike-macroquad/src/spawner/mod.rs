@@ -33,7 +33,7 @@ pub fn spawn_amulet_of_yala(ecs: &mut World, pos: Point) {
     ));
 }
 
-pub async fn spawn_level(ecs: &mut World, level: usize, spawn_points: &[Point]) {
+pub async fn spawn_level(ecs: &mut World, resources: &mut Resources, level: usize, spawn_points: &[Point]) {
     let template = Templates::load().await;
-    template.spawn_entities(ecs, level, spawn_points);
+    template.spawn_entities(ecs, resources, level, spawn_points);
 }
